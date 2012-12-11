@@ -414,7 +414,7 @@ msgstr "als tabel"
 
 #: settings.py:40
 msgid "as table (horizontal)"
-msgstr ""
+msgstr "als tabel (horizontaal)"
 
 #: settings.py:41
 msgid "as unordered list"
@@ -426,11 +426,11 @@ msgstr "eigen implementatie"
 
 #: uploads.py:20
 msgid "This field is required."
-msgstr "Deze veldklasse vereist een model."
+msgstr "Dit veld is verplicht."
 
 #: uploads.py:25
 msgid "This file type is not allowed."
-msgstr ""
+msgstr "Dit bestandsformaat is niet toegestaan."
 
 #: uploads.py:27
 #, python-format
