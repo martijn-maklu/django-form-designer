@@ -1,3 +1,5 @@
+import copy
+
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.conf.urls.defaults import patterns, url
@@ -38,8 +40,27 @@ class FormDefinitionAdmin(admin.ModelAdmin):
     inlines = [
         FormDefinitionFieldInline,
     ]
+    actions = ['form_copy_action']
 
-
+    # form_copy_action based on 
+    # http://blogs.law.harvard.edu/rprasad/2012/08/24/using-django-admin-to-copy-an-object/
+    def form_copy_action(self, request, queryset):
+        for fm in queryset:
+            fm_copy = copy.copy(fm) # create shallow copy
+            fm_copy.id = None # setting id to None makes django add it to the DB once you call the save() method
+            fm_copy.name = fm.name[:250] + '-copy' # make sure the copy is identifiable
+            fm_copy.title = fm.title[:250] + '-copy'
+            fm_copy.save() # add copy to DB
+    
+            # Copy the fields
+            for fld in fm.formdefinitionfield_set.all():
+                fld_copy = copy.copy(fld)
+                fld_copy.id = None
+                fld_copy.form_definition = fm_copy # link field copy to form copy
+                fld_copy.save() # add copy to DB
+    
+    form_copy_action.short_description = _("Copy selected forms")
+     
 class FormLogAdmin(admin.ModelAdmin):
     list_display = ('form_no_link', 'created', 'id', 'created_by', 'data_html')
     list_filter = ('form_definition',)
