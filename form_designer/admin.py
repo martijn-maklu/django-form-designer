@@ -41,6 +41,7 @@ class FormDefinitionAdmin(admin.ModelAdmin):
         FormDefinitionFieldInline,
     ]
     actions = ['form_copy_action']
+    search_fields = ('name', 'title')   
 
     # form_copy_action based on 
     # http://blogs.law.harvard.edu/rprasad/2012/08/24/using-django-admin-to-copy-an-object/
