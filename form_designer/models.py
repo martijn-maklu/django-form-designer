@@ -3,6 +3,7 @@ import hashlib, uuid
 from decimal import Decimal
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.forms import widgets
 from django.core.mail import send_mail
@@ -16,7 +17,7 @@ try:
 except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
-    User = get_user_model()
+    User = settings.AUTH_USER_MODEL
 
 from form_designer.fields import TemplateTextField, TemplateCharField, ModelNameField, RegexpExpressionField
 from form_designer.utils import get_class
