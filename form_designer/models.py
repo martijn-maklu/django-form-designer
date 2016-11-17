@@ -1,6 +1,7 @@
 import re
 import hashlib, uuid
 from decimal import Decimal
+from collections import OrderedDict
 
 from django.db import models
 from django.conf import settings
@@ -8,7 +9,6 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.forms import widgets
 from django.core.mail import send_mail
 from django.conf import settings as django_settings
-from django.utils.datastructures import SortedDict
 from django.core.exceptions import ImproperlyConfigured
 
 # support for custom User models in Django 1.5+
@@ -77,7 +77,7 @@ class FormDefinition(models.Model):
         super(FormDefinition, self).save()
 
     def get_field_dict(self):
-        field_dict = SortedDict()
+        field_dict = OrderedDict()
         names = []
         for field in self.formdefinitionfield_set.all():
             field_dict[field.name] = field

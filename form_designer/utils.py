@@ -1,5 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.importlib import import_module
+from importlib import import_module
 
 def get_class(import_path):
     try:
