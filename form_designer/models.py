@@ -376,7 +376,7 @@ class FormLog(models.Model):
                 value = FormValue()
                 value.field_name = item['name']
                 value.value = item['value']
-                self.values.add(value)
+                self.values.add(value, bulk=False)
             self._data = None
 
 
